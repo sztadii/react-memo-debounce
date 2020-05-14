@@ -1,63 +1,72 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { render } from '@testing-library/react'
 import memoDebounce from './memoDebounce'
 import wait from './wait'
 
 describe('memoDebounce', () => {
-  let renderCount = 0
+  function getParentComponent(debounceDelay) {
+    function Children(props) {
+      const { title, count } = props
 
-  function SimpleComponent(props) {
-    const { title, desc } = props
+      return (
+        <div>
+          <h1>{title}</h1>
+          <p>Children count {count}</p>
+        </div>
+      )
+    }
 
-    renderCount += 1
+    const ChildrenComponent = memoDebounce(Children, debounceDelay)
 
-    return (
-      <div>
-        <h1>{title}</h1>
-        <p>{desc}</p>
-      </div>
-    )
+    function ParentComponent(props) {
+      const [count, setCount] = useState(0)
+
+      return (
+        <div>
+          <button
+            onClick={() => {
+              setCount(count + 1)
+            }}
+          >
+            Increment count
+          </button>
+          <div>Parent count {count}</div>
+          <ChildrenComponent {...props} count={count} />
+        </div>
+      )
+    }
+
+    return ParentComponent
   }
 
-  afterEach(() => {
-    renderCount = 0
-  })
-
   it("renders component's content without issues", () => {
-    const WrappedComponent = memoDebounce(SimpleComponent, 500)
-
-    const { getByText } = render(
-      <WrappedComponent title="Simple title" desc="Simple desc" />
-    )
+    const ParentComponent = getParentComponent(500)
+    const { getByText } = render(<ParentComponent title="Simple title" />)
 
     getByText('Simple title')
-    getByText('Simple desc')
+    getByText('Children count 0')
   })
 
   it("renders component's updated content with 2s delay", async () => {
-    const WrappedComponent = memoDebounce(SimpleComponent, 1000)
-
-    const { getByText, rerender } = render(
-      <WrappedComponent title="Simple title" desc="Simple desc" />
-    )
+    const ParentComponent = getParentComponent(2000)
+    const { getByText } = render(<ParentComponent title="Simple title" />)
 
     getByText('Simple title')
-    getByText('Simple desc')
+    getByText('Children count 0')
 
-    expect(renderCount).toBe(1)
+    getByText('Increment count').click()
+    getByText('Parent count 1')
 
-    rerender(<WrappedComponent title="Updated title" desc="Updated desc" />)
+    await wait(1000)
+
+    getByText('Children count 0')
 
     await wait(500)
 
-    getByText('Simple title')
-    getByText('Simple desc')
+    getByText('Children count 0')
 
     await wait(500)
 
-    getByText('Updated title')
-    getByText('Updated desc')
-
-    expect(renderCount).toBe(2)
+    getByText('Children count 1')
   })
 })
