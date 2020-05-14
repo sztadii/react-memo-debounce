@@ -16,11 +16,11 @@ Import React from 'react'
 import memoDebounce from 'react-memo-debounce'
 
 function SimpleComponent(props) {
-  const { title, desc } = props
+  const { title, description } = props
   return (
     <div>
       <h1>{title}</h1>
-      <p>{desc}</p>
+      <p>{description}</p>
     </div>
   )
 }
