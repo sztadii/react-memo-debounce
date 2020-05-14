@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
 import { render } from '@testing-library/react'
 import memoDebounce from './memoDebounce'
-import wait from './wait'
+
+function wait(delay: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delay)
+  })
+}
 
 describe('memoDebounce', () => {
   function getParentComponent(debounceDelay, initialRenderCount) {
