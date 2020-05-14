@@ -8,11 +8,12 @@
     "prepublish": "npm run build",
     "clean": "rm -rf dist",
     "build": "npm run clean && tsc",
-    "start": "concurrently -k -r -s first 'npm run lint-watch' 'npm run test-watch'",
+    "type-check": "tsc --noEmit",
+    "type-check-watch": "tsc --noEmit --watch",
     "test": "jest --silent",
-    "test-watch": "jest --watch",
-    "lint": "esw './**/*.{ts,tsx}' --ignore-path .gitignore --color",
-    "lint-watch": "esw './**/*.{ts,tsx}' --ignore-path .gitignore --color --watch --cache",
+    "test-watch": "jest --watchAll",
+    "lint": "esw './src/**/*.{ts,tsx}' --ext='.tsx,.ts' --ignore-path .gitignore --color",
+    "lint-watch": "npm run lint -- --watch --cache --clear",
     "format": "prettier --ignore-path .gitignore --write '**/*.{ts,tsx,js,json,scss,css}'"
   },
   "dependencies": {
@@ -21,9 +22,7 @@
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.6",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
     "@babel/preset-typescript": "^7.9.0",
@@ -32,7 +31,6 @@
     "@types/react": "^16.9.35",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.0.1",
-    "concurrently": "^5.2.0",
     "eslint": "^7.0.0",
     "eslint-plugin-jest": "^23.11.0",
     "eslint-plugin-react": "^7.20.0",
