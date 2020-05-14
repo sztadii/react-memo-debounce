@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import debounce from 'lodash/debounce'
 import isDeepEqual from './isDeepEqual'
 
-export default function memoDebounce(
-  ComponentToRender: React.ComponentType,
+export default function memoDebounce<T>(
+  ComponentToRender: React.ComponentType<T>,
   delay = 500
 ) {
-  class DebouncedContainer extends Component {
+  return class DebouncedContainer extends Component<T> {
     prevProps = null
 
     updateDebounced = debounce((nextProps) => {
@@ -32,6 +32,4 @@ export default function memoDebounce(
       return <ComponentToRender {...this.props} />
     }
   }
-
-  return DebouncedContainer
 }
