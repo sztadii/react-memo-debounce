@@ -1,0 +1,52 @@
+{
+  "name": "react-memo-debounce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/memoDebounce.tsx",
+  "scripts": {
+    "preinstall": "npx one-package-manager-enforcer",
+    "test": "jest",
+    "format": "prettier --ignore-path .gitignore --write '**/*.{ts,tsx,js,json,scss,css}'"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-react": "^7.9.4",
+    "@babel/preset-typescript": "^7.9.0",
+    "@testing-library/react": "^10.0.4",
+    "@types/jest": "^25.2.2",
+    "@types/react": "^16.9.35",
+    "babel-jest": "^26.0.1",
+    "husky": "^4.2.5",
+    "jest": "^26.0.1",
+    "lint-staged": "^10.2.2",
+    "prettier": "^2.0.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,json}": [
+      "prettier --write --",
+      "git add"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sztadii/react-memo-debounce.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sztadii/react-memo-debounce/issues"
+  },
+  "homepage": "https://github.com/sztadii/react-memo-debounce#readme"
+}
