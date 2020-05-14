@@ -12,12 +12,44 @@ function SimpleComponent(props) {
   )
 }
 
-test('WrappedComponent render its content', async () => {
-  const WrappedComponent = memoDebounce(SimpleComponent)
+function wait(delay) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, delay)
+  })
+}
 
-  const { getByText } = render(
-    <WrappedComponent title="Simple title" desc="Simpel desc" />
-  )
+describe('memoDebounce', () => {
+  it("renders component's content without issues", () => {
+    const WrappedComponent = memoDebounce(SimpleComponent, 1000)
 
-  getByText('Simple title')
+    const { getByText } = render(
+      <WrappedComponent title="Simple title" desc="Simple desc" />
+    )
+
+    getByText('Simple title')
+    getByText('Simple desc')
+  })
+
+  it("renders component's updated content with 2s delay", async () => {
+    const WrappedComponent = memoDebounce(SimpleComponent, 2000)
+
+    const { getByText, rerender } = render(
+      <WrappedComponent title="Simple title" desc="Simple desc" />
+    )
+
+    getByText('Simple title')
+    getByText('Simple desc')
+
+    rerender(<WrappedComponent title="Updated title" desc="Updated desc" />)
+
+    await wait(1000)
+
+    getByText('Simple title')
+    getByText('Simple desc')
+
+    await wait(1000)
+
+    getByText('Updated title')
+    getByText('Updated desc')
+  })
 })
