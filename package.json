@@ -2,10 +2,16 @@
   "name": "react-memo-debounce",
   "version": "1.0.0",
   "description": "",
-  "main": "src/memoDebounce.tsx",
+  "main": "dist/memoDebounce.js",
   "scripts": {
     "preinstall": "npx one-package-manager-enforcer",
-    "test": "jest",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && babel src/memoDebounce.tsx --out-dir dist --extensions '.tsx'",
+    "start": "concurrently -k -r -s first 'npm run lint-watch' 'npm run test-watch'",
+    "test": "jest --silent",
+    "test-watch": "jest --watch",
+    "lint": "esw './**/*.ts' --ignore-path .gitignore --color --max-warnings 0",
+    "lint-watch": "esw './**/*.ts' --ignore-path .gitignore --color --watch --cache",
     "format": "prettier --ignore-path .gitignore --write '**/*.{ts,tsx,js,json,scss,css}'"
   },
   "dependencies": {
@@ -14,6 +20,7 @@
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
@@ -21,7 +28,12 @@
     "@testing-library/react": "^10.0.4",
     "@types/jest": "^25.2.2",
     "@types/react": "^16.9.35",
+    "babel-eslint": "^10.1.0",
     "babel-jest": "^26.0.1",
+    "concurrently": "^5.2.0",
+    "eslint": "^7.0.0",
+    "eslint-plugin-jest": "^23.11.0",
+    "eslint-watch": "^6.0.1",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "lint-staged": "^10.2.2",
