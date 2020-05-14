@@ -2,11 +2,12 @@
   "name": "react-memo-debounce",
   "version": "1.0.2",
   "description": "A function to prevent additional re-rendering, same as React.memo, but with debounce.",
-  "main": "dist/memoDebounce.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "prepublish": "npm run build",
     "clean": "rm -rf dist",
-    "build": "npm run clean && babel src --out-dir dist --extensions '.ts,.tsx' --ignore '**/*.test.tsx' --source-maps",
+    "build": "npm run clean && tsc",
     "start": "concurrently -k -r -s first 'npm run lint-watch' 'npm run test-watch'",
     "test": "jest --silent",
     "test-watch": "jest --watch",
@@ -39,7 +40,8 @@
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "lint-staged": "^10.2.2",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "typescript": "^3.9.2"
   },
   "husky": {
     "hooks": {

@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import debounce from 'lodash/debounce'
 import isDeepEqual from './isDeepEqual'
 
-export default function memoDebounce(ComponentToRender, delay = 500) {
+export default function memoDebounce(
+  ComponentToRender: React.ComponentType,
+  delay = 500
+) {
   class DebouncedContainer extends Component {
     prevProps = null
 
