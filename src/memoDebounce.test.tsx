@@ -51,7 +51,7 @@ describe('memoDebounce', () => {
               setArrayValue(arrays[arrayCount])
             }}
           >
-            Update array
+            Set new array with same values
           </button>
           <ChildrenComponent {...props} array={array} count={count} />
         </div>
@@ -98,7 +98,7 @@ describe('memoDebounce', () => {
 
     getByText('Simple title')
 
-    getByText('Update array').click()
+    getByText('Set new array with same values').click()
 
     await wait(1000)
 
