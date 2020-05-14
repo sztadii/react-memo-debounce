@@ -72,43 +72,43 @@ describe('memoDebounce', () => {
   })
 
   it("renders component's updated content with 2s delay", async () => {
-    const { ParentComponent } = getParentComponent(2000, 0)
+    const { ParentComponent } = getParentComponent(1000, 0)
     const { getByText } = render(<ParentComponent title="Simple title" />)
 
     getByText('Simple title')
 
     getByText('Increment count').click()
 
-    await wait(1000)
-
-    getByText('Children render count 1')
-
     await wait(500)
 
     getByText('Children render count 1')
 
-    await wait(500)
+    await wait(250)
+
+    getByText('Children render count 1')
+
+    await wait(250)
 
     getByText('Children render count 2')
   })
 
-  it('will not render if values does not change', async () => {
-    const { ParentComponent } = getParentComponent(2000, 0)
+  it('will not render if updated parent props have same values', async () => {
+    const { ParentComponent } = getParentComponent(1000, 0)
     const { getByText } = render(<ParentComponent title="Simple title" />)
 
     getByText('Simple title')
 
     getByText('Set new array with same values').click()
 
-    await wait(1000)
-
-    getByText('Children render count 1')
-
     await wait(500)
 
     getByText('Children render count 1')
 
-    await wait(500)
+    await wait(250)
+
+    getByText('Children render count 1')
+
+    await wait(250)
 
     getByText('Children render count 1')
   })
