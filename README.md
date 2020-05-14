@@ -4,6 +4,11 @@
 
 A function to prevent additional re-rendering, same as React.memo, but with debounce.
 
+## How to install
+```
+npm install react-memo-debounce
+```
+
 ## Example
 
 ```
