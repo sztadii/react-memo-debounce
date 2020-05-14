@@ -8,16 +8,17 @@ export default function memoDebounce(ComponentToRender, delay = 500) {
 
     updateDebounced = debounce((nextProps) => {
       const isPropsEqual = isDeepEqual(nextProps, this.prevProps)
-
       if (isPropsEqual) return
-
-      this.prevProps = nextProps
       this.forceUpdate()
     }, delay)
 
     shouldComponentUpdate(nextProps) {
       this.updateDebounced(nextProps)
       return false
+    }
+
+    componentDidMount() {
+      this.prevProps = this.props
     }
 
     componentWillUnmount() {

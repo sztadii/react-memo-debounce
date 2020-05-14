@@ -4,14 +4,22 @@ import memoDebounce from './memoDebounce'
 import wait from './wait'
 
 describe('memoDebounce', () => {
-  function getParentComponent(debounceDelay) {
+  function getParentComponent(debounceDelay, initialRenderCount) {
+    let renderCount = { count: initialRenderCount }
+
     function Children(props) {
-      const { title, count } = props
+      const { title, array } = props
+
+      renderCount.count += 1
 
       return (
         <div>
           <h1>{title}</h1>
-          <p>Children count {count}</p>
+          <p>Children render count {renderCount.count}</p>
+
+          {array.map((e) => (
+            <div key={e.name}>{e.name}</div>
+          ))}
         </div>
       )
     }
@@ -19,6 +27,12 @@ describe('memoDebounce', () => {
     const ChildrenComponent = memoDebounce(Children, debounceDelay)
 
     function ParentComponent(props) {
+      const arrays = [
+        [{ name: 'Name' }, { name: 'Other name' }],
+        [{ name: 'Name' }, { name: 'Other name' }]
+      ]
+      let arrayCount = 0
+      const [array, setArrayValue] = useState(arrays[0])
       const [count, setCount] = useState(0)
 
       return (
@@ -30,43 +44,72 @@ describe('memoDebounce', () => {
           >
             Increment count
           </button>
-          <div>Parent count {count}</div>
-          <ChildrenComponent {...props} count={count} />
+
+          <button
+            onClick={() => {
+              arrayCount += 1
+              setArrayValue(arrays[arrayCount])
+            }}
+          >
+            Update array
+          </button>
+          <ChildrenComponent {...props} array={array} count={count} />
         </div>
       )
     }
 
-    return ParentComponent
+    return {
+      ParentComponent
+    }
   }
 
   it("renders component's content without issues", () => {
-    const ParentComponent = getParentComponent(500)
+    const { ParentComponent } = getParentComponent(500, 0)
     const { getByText } = render(<ParentComponent title="Simple title" />)
 
     getByText('Simple title')
-    getByText('Children count 0')
+    getByText('Children render count 1')
   })
 
   it("renders component's updated content with 2s delay", async () => {
-    const ParentComponent = getParentComponent(2000)
+    const { ParentComponent } = getParentComponent(2000, 0)
     const { getByText } = render(<ParentComponent title="Simple title" />)
 
     getByText('Simple title')
-    getByText('Children count 0')
 
     getByText('Increment count').click()
-    getByText('Parent count 1')
 
     await wait(1000)
 
-    getByText('Children count 0')
+    getByText('Children render count 1')
 
     await wait(500)
 
-    getByText('Children count 0')
+    getByText('Children render count 1')
 
     await wait(500)
 
-    getByText('Children count 1')
+    getByText('Children render count 2')
+  })
+
+  it('will not render if values does not change', async () => {
+    const { ParentComponent } = getParentComponent(2000, 0)
+    const { getByText } = render(<ParentComponent title="Simple title" />)
+
+    getByText('Simple title')
+
+    getByText('Update array').click()
+
+    await wait(1000)
+
+    getByText('Children render count 1')
+
+    await wait(500)
+
+    getByText('Children render count 1')
+
+    await wait(500)
+
+    getByText('Children render count 1')
   })
 })
