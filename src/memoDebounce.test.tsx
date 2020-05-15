@@ -117,6 +117,7 @@ describe('memoDebounce', () => {
 
     getByText('In children childrenRenderCount value 1')
 
+    // Back to the first value of the array
     getByText('Toggle parent array value').click()
 
     await wait(1100)
@@ -166,7 +167,10 @@ describe('memoDebounce', () => {
     getByText('Increment parentRenderCount').click()
     getByText('In parent parentRenderCount 4')
 
-    await wait(1100)
+    await wait(500)
+    getByText('In children prentRenderCount value 0')
+
+    await wait(500)
     getByText('In children prentRenderCount value 4')
     getByText('In parent parentRenderCount 4')
   })
