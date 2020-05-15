@@ -8,7 +8,11 @@ function wait(delay: number) {
   })
 }
 
-function getInitialElements(debounceDelay: number, initialRenderCount: number) {
+function getInitialElements(
+  debounceDelay: number,
+  initialRenderCount: number,
+  comparePropsFunction?: any
+) {
   let childrenRenderCount = initialRenderCount
   let parentActiveArrayIndex = 0
 
@@ -34,7 +38,11 @@ function getInitialElements(debounceDelay: number, initialRenderCount: number) {
     )
   }
 
-  const ChildrenComponent = memoDebounce(Children, debounceDelay)
+  const ChildrenComponent = memoDebounce(
+    Children,
+    debounceDelay,
+    comparePropsFunction
+  )
 
   function ParentComponent(props: { title: string }) {
     const arrays = [
@@ -173,5 +181,47 @@ describe('memoDebounce', () => {
     await wait(500)
     getByText('In children prentRenderCount value 4')
     getByText('In parent parentRenderCount 4')
+  })
+
+  it('when isEqualFunction return true then children component never re-render', async () => {
+    const isEqualFunction = () => {
+      return true
+    }
+
+    const { ParentComponent } = getInitialElements(400, 0, isEqualFunction)
+    const { getByText } = render(<ParentComponent title="Simple title" />)
+
+    getByText('Simple title')
+
+    getByText('Increment parentRenderCount').click()
+
+    await wait(500)
+    getByText('In children childrenRenderCount value 1')
+
+    getByText('Increment parentRenderCount').click()
+
+    await wait(500)
+    getByText('In children childrenRenderCount value 1')
+  })
+
+  it('when isEqualFunction return false then children component always re-render', async () => {
+    const isEqualFunction = () => {
+      return false
+    }
+
+    const { ParentComponent } = getInitialElements(400, 0, isEqualFunction)
+    const { getByText } = render(<ParentComponent title="Simple title" />)
+
+    getByText('Simple title')
+
+    getByText('Increment parentRenderCount').click()
+
+    await wait(500)
+    getByText('In children childrenRenderCount value 2')
+
+    getByText('Increment parentRenderCount').click()
+
+    await wait(500)
+    getByText('In children childrenRenderCount value 3')
   })
 })
