@@ -2,7 +2,9 @@
 
 ## Description:
 
-A function to prevent additional re-rendering, same as React.memo, but with debounce.
+A function to prevent unnecessary render calls.
+Almost like React.memo, but by default we will deep compare values with debounce effect.
+So we will avoid many unnecessary render calls.
 
 ## How to install
 ```

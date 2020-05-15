@@ -1,7 +1,17 @@
 {
   "name": "react-memo-debounce",
   "version": "1.0.5",
-  "description": "A function to prevent additional re-rendering, same as React.memo, but with debounce.",
+  "description": "A function to prevent unnecessary render calls ( almost like React.memo )",
+  "tags": [
+    "react",
+    "memo",
+    "debounce"
+  ],
+  "keywords": [
+    "react",
+    "memo",
+    "debounce"
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -58,7 +68,6 @@
     "type": "git",
     "url": "git+https://github.com/sztadii/react-memo-debounce.git"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
