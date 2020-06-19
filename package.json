@@ -28,6 +28,7 @@
     "test-watch": "jest --watchAll",
     "lint": "esw './src/**/*.{ts,tsx}' --ext='.tsx,.ts' --ignore-path .gitignore --color",
     "lint-watch": "npm run lint -- --watch --cache --clear",
+    "lint-names": "file-naming-enforcer type=camelCase folder=./src",
     "format": "prettier --ignore-path .gitignore --write '**/*.{ts,tsx,js,json,scss,css}'"
   },
   "dependencies": {
@@ -50,6 +51,7 @@
     "eslint-plugin-jest": "^23.11.0",
     "eslint-plugin-react": "^7.20.0",
     "eslint-watch": "^6.0.1",
+    "file-naming-enforcer": "^1.1.6",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "lint-staged": "^10.2.2",
