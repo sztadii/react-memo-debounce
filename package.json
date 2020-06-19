@@ -18,6 +18,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "preinstall": "REQUIRED=npm npx one-package-manager-enforcer",
     "prepublish": "npm run build && npm run build-types",
     "clean": "rm -rf dist",
     "build": "npm run clean && tsc -p tsconfig-build.json",
