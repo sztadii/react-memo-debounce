@@ -3,7 +3,7 @@ name: Quality check
 on: [push]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -11,9 +11,21 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
-      - run: npm ci
-      - run: npm run type-check
-      - run: npm run lint
-      - run: npm run lint-names
-      - run: npm run test
-      - run: npm run build
+
+      - name: Dependency instalation
+        run: npm ci
+
+      - name: Lint scripts
+        run: npm run lint
+
+      - name: Checking file name convention
+        run: npm run lint-names
+
+      - name: Integration tests
+        run: npm run test
+
+      - name: Checking packages security
+        run: npm audit --audit-level=moderate
+
+      - name: Checking typescript types and build app
+        run: npm run build
