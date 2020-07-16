@@ -101,6 +101,7 @@ describe('memoDebounce', () => {
     const { getByText } = render(<ParentComponent title="Simple title" />)
 
     getByText('Simple title')
+    getByText('In children childrenRenderCount value 1')
 
     getByText('Increment parentRenderCount').click()
 
@@ -118,6 +119,7 @@ describe('memoDebounce', () => {
     const { getByText } = render(<ParentComponent title="Simple title" />)
 
     getByText('Simple title')
+    getByText('In children childrenRenderCount value 1')
 
     getByText('Toggle parent array value').click()
 
@@ -138,6 +140,7 @@ describe('memoDebounce', () => {
     const { getByText } = render(<ParentComponent title="Simple title" />)
 
     getByText('Simple title')
+    getByText('In children childrenRenderCount value 1')
 
     getByText('Toggle parent array value').click()
     await wait(1000)
@@ -192,6 +195,7 @@ describe('memoDebounce', () => {
     const { getByText } = render(<ParentComponent title="Simple title" />)
 
     getByText('Simple title')
+    getByText('In children childrenRenderCount value 1')
 
     getByText('Increment parentRenderCount').click()
 
@@ -213,6 +217,7 @@ describe('memoDebounce', () => {
     const { getByText } = render(<ParentComponent title="Simple title" />)
 
     getByText('Simple title')
+    getByText('In children childrenRenderCount value 1')
 
     getByText('Increment parentRenderCount').click()
 
