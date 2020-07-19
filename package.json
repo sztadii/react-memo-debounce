@@ -1,6 +1,6 @@
 {
   "name": "react-memo-debounce",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A function to prevent unnecessary render calls ( almost like React.memo )",
   "tags": [
     "react",
@@ -32,7 +32,7 @@
     "format": "prettier --ignore-path .gitignore --write '**/*.{ts,tsx,js,json,scss,css}'"
   },
   "dependencies": {
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
