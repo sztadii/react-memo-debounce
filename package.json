@@ -1,6 +1,6 @@
 {
   "name": "react-memo-debounce",
-  "version": "1.0.10",
+  "version": "1.1.0",
   "description": "A function to prevent unnecessary render calls ( almost like React.memo )",
   "tags": [
     "react",
@@ -33,8 +33,13 @@
   },
   "dependencies": {
     "lodash": "^4.17.20",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "peerDependencies": {
+    "lodash": "^4.17.20",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.11.5",
