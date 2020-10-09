@@ -8,6 +8,7 @@ So we will avoid many unnecessary render calls.
 
 ## How to install
 ```
+npm install lodash // skip it if you are using lodash in your project
 npm install react-memo-debounce
 ```
 
