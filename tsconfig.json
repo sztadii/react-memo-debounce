@@ -17,8 +17,6 @@
     "isolatedModules": true,
     "strict": true,
     "noImplicitAny": true,
-    "strictFunctionTypes": true,
-    "strictNullChecks": true,
     "baseUrl": "src",
     "outDir": "dist"
   },
