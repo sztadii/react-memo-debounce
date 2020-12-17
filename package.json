@@ -81,5 +81,49 @@
   "bugs": {
     "url": "https://github.com/sztadii/react-memo-debounce/issues"
   },
-  "homepage": "https://github.com/sztadii/react-memo-debounce#readme"
+  "homepage": "https://github.com/sztadii/react-memo-debounce#readme",
+  "prettier": {
+    "tabWidth": 2,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "semi": false
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "jest"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:jest/recommended",
+      "plugin:react/recommended"
+    ],
+    "env": {
+      "node": true,
+      "jest": true,
+      "es6": true
+    },
+    "rules": {
+      "no-console": "off",
+      "react/prop-types": "off",
+      "jest/expect-expect": "off"
+    },
+    "parserOptions": {
+      "sourceType": "module"
+    }
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ],
+      "@babel/preset-typescript",
+      "@babel/preset-react"
+    ]
+  }
 }
