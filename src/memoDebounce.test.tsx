@@ -4,16 +4,16 @@ import memoDebounce from './memoDebounce'
 
 describe('memoDebounce', () => {
   it("render the component's content without any issues", () => {
-    const ParentComponent = getInitialElements(500)
-    const { getByText } = render(<ParentComponent title="Simple title" />)
+    const Component = getWrapperComponent(500)
+    const { getByText } = render(<Component title="Simple title" />)
 
     getByText('Simple title')
     getByText('In children childrenRenderCount value 1')
   })
 
   it("render the component's updated content with some delay", async () => {
-    const ParentComponent = getInitialElements(1000)
-    const { getByText } = render(<ParentComponent title="Simple title" />)
+    const Component = getWrapperComponent(1000)
+    const { getByText } = render(<Component title="Simple title" />)
 
     getByText('Simple title')
     getByText('In children childrenRenderCount value 1')
@@ -30,8 +30,8 @@ describe('memoDebounce', () => {
   })
 
   it('will not render if updated parent props have the same value', async () => {
-    const ParentComponent = getInitialElements(1000)
-    const { getByText } = render(<ParentComponent title="Simple title" />)
+    const Component = getWrapperComponent(1000)
+    const { getByText } = render(<Component title="Simple title" />)
 
     getByText('Simple title')
     getByText('In children childrenRenderCount value 1')
@@ -51,8 +51,8 @@ describe('memoDebounce', () => {
   })
 
   it("when each time parent's props change the deep value then children render the update value", async () => {
-    const ParentComponent = getInitialElements(1000)
-    const { getByText } = render(<ParentComponent title="Simple title" />)
+    const Component = getWrapperComponent(1000)
+    const { getByText } = render(<Component title="Simple title" />)
 
     getByText('Simple title')
     getByText('In children childrenRenderCount value 1')
@@ -67,8 +67,8 @@ describe('memoDebounce', () => {
   })
 
   it('when multi times parent component was updating then children will render only last time', async () => {
-    const ParentComponent = getInitialElements(1000)
-    const { getByText } = render(<ParentComponent title="Simple title" />)
+    const Component = getWrapperComponent(1000)
+    const { getByText } = render(<Component title="Simple title" />)
 
     getByText('Simple title')
 
@@ -106,8 +106,8 @@ describe('memoDebounce', () => {
       return true
     }
 
-    const ParentComponent = getInitialElements(400, isEqualFunction)
-    const { getByText } = render(<ParentComponent title="Simple title" />)
+    const Component = getWrapperComponent(400, isEqualFunction)
+    const { getByText } = render(<Component title="Simple title" />)
 
     getByText('Simple title')
     getByText('In children childrenRenderCount value 1')
@@ -128,8 +128,8 @@ describe('memoDebounce', () => {
       return false
     }
 
-    const ParentComponent = getInitialElements(400, isEqualFunction)
-    const { getByText } = render(<ParentComponent title="Simple title" />)
+    const Component = getWrapperComponent(400, isEqualFunction)
+    const { getByText } = render(<Component title="Simple title" />)
 
     getByText('Simple title')
     getByText('In children childrenRenderCount value 1')
@@ -152,7 +152,7 @@ function wait(delay: number) {
   })
 }
 
-function getInitialElements(
+function getWrapperComponent(
   debounceDelay: number,
   comparePropsFunction?: () => boolean
 ) {
