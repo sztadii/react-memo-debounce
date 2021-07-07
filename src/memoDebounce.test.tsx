@@ -10,10 +10,9 @@ function wait(delay: number) {
 
 function getInitialElements(
   debounceDelay: number,
-  initialRenderCount: number,
-  comparePropsFunction?: any
+  comparePropsFunction?: () => boolean
 ) {
-  let childrenRenderCount = initialRenderCount
+  let childrenRenderCount = 0
   let parentActiveArrayIndex = 0
 
   function Children(props: {
@@ -89,7 +88,7 @@ function getInitialElements(
 
 describe('memoDebounce', () => {
   it("render the component's content without any issues", () => {
-    const { ParentComponent } = getInitialElements(500, 0)
+    const { ParentComponent } = getInitialElements(500)
     const { getByText } = render(<ParentComponent title="Simple title" />)
 
     getByText('Simple title')
@@ -97,7 +96,7 @@ describe('memoDebounce', () => {
   })
 
   it("render the component's updated content with some delay", async () => {
-    const { ParentComponent } = getInitialElements(1000, 0)
+    const { ParentComponent } = getInitialElements(1000)
     const { getByText } = render(<ParentComponent title="Simple title" />)
 
     getByText('Simple title')
@@ -115,7 +114,7 @@ describe('memoDebounce', () => {
   })
 
   it('will not render if updated parent props have the same value', async () => {
-    const { ParentComponent } = getInitialElements(1000, 0)
+    const { ParentComponent } = getInitialElements(1000)
     const { getByText } = render(<ParentComponent title="Simple title" />)
 
     getByText('Simple title')
@@ -136,7 +135,7 @@ describe('memoDebounce', () => {
   })
 
   it("when each time parent's props change the deep value then children render the update value", async () => {
-    const { ParentComponent } = getInitialElements(1000, 0)
+    const { ParentComponent } = getInitialElements(1000)
     const { getByText } = render(<ParentComponent title="Simple title" />)
 
     getByText('Simple title')
@@ -152,7 +151,7 @@ describe('memoDebounce', () => {
   })
 
   it('when multi times parent component was updating then children will render only last time', async () => {
-    const { ParentComponent } = getInitialElements(1000, 0)
+    const { ParentComponent } = getInitialElements(1000)
     const { getByText } = render(<ParentComponent title="Simple title" />)
 
     getByText('Simple title')
@@ -191,7 +190,7 @@ describe('memoDebounce', () => {
       return true
     }
 
-    const { ParentComponent } = getInitialElements(400, 0, isEqualFunction)
+    const { ParentComponent } = getInitialElements(400, isEqualFunction)
     const { getByText } = render(<ParentComponent title="Simple title" />)
 
     getByText('Simple title')
@@ -213,7 +212,7 @@ describe('memoDebounce', () => {
       return false
     }
 
-    const { ParentComponent } = getInitialElements(400, 0, isEqualFunction)
+    const { ParentComponent } = getInitialElements(400, isEqualFunction)
     const { getByText } = render(<ParentComponent title="Simple title" />)
 
     getByText('Simple title')
