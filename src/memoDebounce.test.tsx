@@ -66,7 +66,7 @@ describe('memoDebounce', () => {
     getByText('In children childrenRenderCount value 3')
   })
 
-  it('when multi times parent component was updating then children will render only last time', async () => {
+  it('when the parent component was updating many times then children will render only last time', async () => {
     const Component = getWrapperComponent(1000)
     const { getByText } = render(<Component title="Simple title" />)
 
