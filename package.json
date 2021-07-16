@@ -1,6 +1,6 @@
 {
   "name": "react-memo-debounce",
-  "version": "1.1.1",
+  "version": "0.0.0-development",
   "description": "A function to prevent unnecessary render calls ( almost like React.memo )",
   "tags": [
     "react",
@@ -29,7 +29,8 @@
     "lint": "esw \"./src/**/*.{ts,tsx}\" --ext=\".tsx,.ts\" --ignore-path .gitignore --color",
     "lint-watch": "npm run lint -- --watch --cache --clear",
     "lint-names": "file-naming-enforcer type=camelCase folder=./src",
-    "format": "prettier --ignore-path .gitignore --write \"**/*.{ts,tsx,js,json,scss,css}\""
+    "format": "prettier --ignore-path .gitignore --write \"**/*.{ts,tsx,js,json,scss,css}\"",
+    "semantic-release": "semantic-release"
   },
   "dependencies": {
     "lodash": "^4.17.20",
@@ -60,7 +61,8 @@
     "lint-staged": "^10.3.0",
     "prettier": "^2.1.1",
     "react-dom": "^16.12.0",
-    "typescript": "^3.9.7"
+    "typescript": "^3.9.7",
+    "semantic-release": "^17.4.4"
   },
   "husky": {
     "hooks": {
@@ -74,7 +76,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sztadii/react-memo-debounce.git"
+    "url": "https://github.com/sztadii/react-memo-debounce.git"
   },
   "author": "",
   "license": "ISC",
