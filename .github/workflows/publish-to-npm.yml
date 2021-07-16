@@ -14,6 +14,9 @@ jobs:
         with:
           node-version: '12'
 
+      - name: Dependency instalation
+        run: npm ci
+
       - name: Publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
