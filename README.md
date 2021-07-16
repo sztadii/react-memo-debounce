@@ -3,7 +3,7 @@
 ## Description:
 
 A function to prevent unnecessary render calls. <br />
-Almost like React.memo, but by default we will deep compare values with debounce effect. <br />
+Almost like `React.memo`, but by default we will deeply compare values with debounce effect. <br />
 So we will avoid many unnecessary render calls. <br />
 It can be useful when each render operation is doing some expensive calculation. <br />
 
