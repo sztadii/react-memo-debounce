@@ -1,7 +1,7 @@
 import isDeepEqual from './isDeepEqual'
 
 describe('isDeepEqual', () => {
-  it('return true when two objects are deep equal', () => {
+  it('returns true when two objects are deep equal', () => {
     const firstObj = {
       list: [
         {
@@ -21,7 +21,7 @@ describe('isDeepEqual', () => {
     expect(isDeepEqual(firstObj, secondObj)).toBe(true)
   })
 
-  it('return false when two objects are not deep equal', () => {
+  it('returns false when two objects are not deep equal', () => {
     const firstObj = {
       list: [
         {

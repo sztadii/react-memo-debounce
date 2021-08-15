@@ -3,15 +3,14 @@ import { render } from '@testing-library/react'
 import memoDebounce from './memoDebounce'
 
 describe('memoDebounce', () => {
-  it("render the component's content without any issues", () => {
+  it('renders a content without any issues', () => {
     const Component = getWrapperComponent(500)
     const { getByText } = render(<Component title="Simple title" />)
 
     getByText('Simple title')
-    getByText('In children childrenRenderCount value 1')
   })
 
-  it("render the component's updated content with some delay", async () => {
+  it('renders an updated content with some delay', async () => {
     const Component = getWrapperComponent(1000)
     const { getByText } = render(<Component title="Simple title" />)
 
@@ -29,7 +28,7 @@ describe('memoDebounce', () => {
     getByText('In children childrenRenderCount value 2')
   })
 
-  it('will not render if updated parent props have the same value', async () => {
+  it('do not re-render if updated parent props have the same value', async () => {
     const Component = getWrapperComponent(1000)
     const { getByText } = render(<Component title="Simple title" />)
 
@@ -50,7 +49,7 @@ describe('memoDebounce', () => {
     getByText('In children childrenRenderCount value 1')
   })
 
-  it("when each time parent's props change the deep value then children render the update value", async () => {
+  it("when the parent's props have changed the deep value then children render the updated value", async () => {
     const Component = getWrapperComponent(1000)
     const { getByText } = render(<Component title="Simple title" />)
 
@@ -66,7 +65,7 @@ describe('memoDebounce', () => {
     getByText('In children childrenRenderCount value 3')
   })
 
-  it('when the parent component was updating many times then children will render only last time', async () => {
+  it('when the parent component was updating the state many times then children will render after the last time', async () => {
     const Component = getWrapperComponent(1000)
     const { getByText } = render(<Component title="Simple title" />)
 
