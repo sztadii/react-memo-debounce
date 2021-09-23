@@ -9,7 +9,6 @@ It can be useful when each render operation is doing some expensive calculation.
 
 ## How to install
 ```
-npm install lodash // skip it if you are using lodash in your project
 npm install react-memo-debounce
 ```
 
