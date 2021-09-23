@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import debounce from 'lodash/debounce'
+import debounce from 'lodash.debounce'
 import isDeepEqual from './isDeepEqual'
 
 export type CompareFunction<T> = (prevProps?: T, nextProps?: T) => boolean
