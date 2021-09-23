@@ -29,7 +29,7 @@ function SimpleComponent(props) {
   )
 }
 
-export default memoDebounce(SimpleComponent, 1000)
+export default memoDebounce(SimpleComponent, { delay: 1_000 })
 ```
 
 Here we will wait 500ms and compare props by own function
@@ -48,5 +48,5 @@ function SimpleComponent(props) {
 }
 
 const isEqual = (prevProps, nextProps) => prevProps.title === nextProps.title
-export default memoDebounce(SimpleComponent, 500, isEqual)
+export default memoDebounce(SimpleComponent, { delay: 500, isEqualFunction: isEqual })
 ```
