@@ -4,17 +4,22 @@ import isDeepEqual from './isDeepEqual'
 
 export type CompareFunction<T> = (prevProps?: T, nextProps?: T) => boolean
 
+type Options<T> = {
+  delay?: number
+  isEqualFunction?: CompareFunction<T>
+}
+
 export default function memoDebounce<T>(
   ComponentToRender: React.ComponentType<T>,
-  delay = 500,
-  isCustomEqualFunction?: CompareFunction<T>
+  options: Options<T>
 ) {
+  const { delay = 500, isEqualFunction = isDeepEqual } = options
+
   return class DebouncedContainer extends Component<T> {
     prevProps: T | undefined
 
     updateDebounced = debounce((nextProps) => {
-      const functionToCompareProps = isCustomEqualFunction || isDeepEqual
-      const isPropsEqual = functionToCompareProps(nextProps, this.prevProps)
+      const isPropsEqual = isEqualFunction(nextProps, this.prevProps)
 
       if (isPropsEqual) return
 

@@ -180,11 +180,10 @@ function getWrapperComponent(
     )
   }
 
-  const ChildrenComponent = memoDebounce(
-    Children,
-    debounceDelay,
-    comparePropsFunction
-  )
+  const ChildrenComponent = memoDebounce(Children, {
+    delay: debounceDelay,
+    isEqualFunction: comparePropsFunction
+  })
 
   function ParentComponent(props: { title: string }) {
     const arrays = [
