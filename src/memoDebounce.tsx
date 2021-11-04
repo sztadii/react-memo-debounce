@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import debounce from 'lodash.debounce'
 import isDeepEqual from './isDeepEqual'
 
-export type CompareFunction<T> = (prevProps?: T, nextProps?: T) => boolean
+export type CompareFunction<T> = (
+  prevProps: T | undefined,
+  nextProps: T
+) => boolean
 
 type Options<T> = {
   delay?: number
@@ -19,7 +22,7 @@ export default function memoDebounce<T>(
     prevProps: T | undefined
 
     updateDebounced = debounce((nextProps) => {
-      const isPropsEqual = isEqualFunction(nextProps, this.prevProps)
+      const isPropsEqual = isEqualFunction(this.prevProps, nextProps)
 
       if (isPropsEqual) return
 
