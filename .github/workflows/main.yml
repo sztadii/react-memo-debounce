@@ -27,6 +27,9 @@ jobs:
       - name: Checking typescript types and build app
         run: npm run build
 
+      - name: Run prepublish script
+        run: npm run prepublish
+
       # semantic-release release only from master branch, so do not be worry
       - name: Publish to NPM
         run: npx semantic-release
