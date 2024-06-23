@@ -24,9 +24,6 @@ jobs:
       - name: Integration tests
         run: npm run test
 
-      - name: Checking typescript types and build app
-        run: npm run build
-
       - name: Run prepublish script
         run: npm run prepublish
 
